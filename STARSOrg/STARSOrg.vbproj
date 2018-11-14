@@ -72,13 +72,30 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.vb">
+    <Compile Include="CDB.vb" />
+    <Compile Include="CRole.vb" />
+    <Compile Include="CRoles.vb" />
+    <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="frmMain.Designer.vb">
+      <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmRole.Designer.vb">
+      <DependentUpon>frmRole.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmRole.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSecurity.Designer.vb">
+      <DependentUpon>frmSecurity.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSecurity.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modDB.vb" />
+    <Compile Include="modGlobal.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -96,8 +113,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRole.resx">
+      <DependentUpon>frmRole.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSecurity.resx">
+      <DependentUpon>frmSecurity.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -117,6 +140,39 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\STARS National LOGO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\member.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\roles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\events.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\rsvp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\courses.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\semesters.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\tutors.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
