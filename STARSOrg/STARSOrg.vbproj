@@ -75,6 +75,14 @@
     <Compile Include="CDB.vb" />
     <Compile Include="CRole.vb" />
     <Compile Include="CRoles.vb" />
+    <Compile Include="CSecurities.vb" />
+    <Compile Include="CSecurity.vb" />
+    <Compile Include="frmChangePass.Designer.vb">
+      <DependentUpon>frmChangePass.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmChangePass.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +104,7 @@
     </Compile>
     <Compile Include="modDB.vb" />
     <Compile Include="modGlobal.vb" />
+    <Compile Include="modObjects.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -113,6 +122,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmChangePass.resx">
+      <DependentUpon>frmChangePass.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -173,6 +185,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\tutors.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Logon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

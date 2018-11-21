@@ -13,7 +13,11 @@
     Public Const ACTION_TUTOR = 9
     Public Const ACTION_LOGOUT = 10
 #End Region
+
     Public intNextAction As Integer
-    Public myDB As CDB
+    Public myDB As New CDB
+    Public user_PID As Integer
+    Public user_LName As String
+    Public user_FName As String
 
 End Module

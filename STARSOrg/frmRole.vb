@@ -4,8 +4,6 @@ Public Class frmRole
     Private blnClearing As Boolean
     Private blnReloading As Boolean
 
-
-
 #Region "Toolbar"
 
 
@@ -27,6 +25,7 @@ Public Class frmRole
     Private Sub tsbHome_Click(sender As Object, e As EventArgs) Handles tsbHome.Click
         intNextAction = ACTION_HOME
         Me.Hide()
+        frmMain.Show()
     End Sub
 
     Private Sub tsbCourse_Click(sender As Object, e As EventArgs) Handles tsbCourse.Click
@@ -95,4 +94,9 @@ Public Class frmRole
 
     End Sub
 
+    Private Sub frmRole_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        ClearScreenControls(Me)
+        LoadRoles()
+        grpEdit.Enabled = False
+    End Sub
 End Class

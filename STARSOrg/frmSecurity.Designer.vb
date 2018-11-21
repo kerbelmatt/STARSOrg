@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmSecurity
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,27 +20,27 @@ Partial Class frmSecurity
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSecurity))
         Me.txtUserName = New System.Windows.Forms.TextBox()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.lblUserName = New System.Windows.Forms.Label()
         Me.lblPassword = New System.Windows.Forms.Label()
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.lnlForgotPassword = New System.Windows.Forms.LinkLabel()
         Me.SuspendLayout()
         '
         'txtUserName
         '
-        Me.txtUserName.Location = New System.Drawing.Point(125, 47)
+        Me.txtUserName.Location = New System.Drawing.Point(83, 20)
         Me.txtUserName.Name = "txtUserName"
         Me.txtUserName.Size = New System.Drawing.Size(163, 20)
         Me.txtUserName.TabIndex = 5
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(125, 76)
+        Me.txtPassword.Location = New System.Drawing.Point(83, 54)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(163, 20)
         Me.txtPassword.TabIndex = 6
@@ -48,7 +48,7 @@ Partial Class frmSecurity
         'lblUserName
         '
         Me.lblUserName.AutoSize = True
-        Me.lblUserName.Location = New System.Drawing.Point(59, 50)
+        Me.lblUserName.Location = New System.Drawing.Point(17, 23)
         Me.lblUserName.Name = "lblUserName"
         Me.lblUserName.Size = New System.Drawing.Size(58, 13)
         Me.lblUserName.TabIndex = 7
@@ -57,7 +57,7 @@ Partial Class frmSecurity
         'lblPassword
         '
         Me.lblPassword.AutoSize = True
-        Me.lblPassword.Location = New System.Drawing.Point(61, 79)
+        Me.lblPassword.Location = New System.Drawing.Point(19, 57)
         Me.lblPassword.Name = "lblPassword"
         Me.lblPassword.Size = New System.Drawing.Size(56, 13)
         Me.lblPassword.TabIndex = 8
@@ -65,7 +65,7 @@ Partial Class frmSecurity
         '
         'btnLogin
         '
-        Me.btnLogin.Location = New System.Drawing.Point(212, 107)
+        Me.btnLogin.Location = New System.Drawing.Point(83, 92)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(75, 23)
         Me.btnLogin.TabIndex = 9
@@ -74,36 +74,30 @@ Partial Class frmSecurity
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(125, 107)
+        Me.btnCancel.Location = New System.Drawing.Point(171, 92)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 10
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'lnlForgotPassword
-        '
-        Me.lnlForgotPassword.AutoSize = True
-        Me.lnlForgotPassword.Location = New System.Drawing.Point(157, 140)
-        Me.lnlForgotPassword.Name = "lnlForgotPassword"
-        Me.lnlForgotPassword.Size = New System.Drawing.Size(92, 13)
-        Me.lnlForgotPassword.TabIndex = 11
-        Me.lnlForgotPassword.TabStop = True
-        Me.lnlForgotPassword.Text = "Forgot Password?"
-        '
         'frmSecurity
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(347, 190)
-        Me.Controls.Add(Me.lnlForgotPassword)
+        Me.ClientSize = New System.Drawing.Size(270, 130)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.lblPassword)
         Me.Controls.Add(Me.lblUserName)
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.txtUserName)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmSecurity"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Login"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -116,5 +110,4 @@ Partial Class frmSecurity
     Friend WithEvents lblPassword As Label
     Friend WithEvents btnLogin As Button
     Friend WithEvents btnCancel As Button
-    Friend WithEvents lnlForgotPassword As LinkLabel
 End Class

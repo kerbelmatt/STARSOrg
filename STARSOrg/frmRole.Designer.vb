@@ -69,7 +69,7 @@ Partial Class frmRole
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator8, Me.tsbHome, Me.ToolStripSeparator7, Me.tsbMember, Me.ToolStripSeparator6, Me.tsbRole, Me.ToolStripSeparator5, Me.tsbEvent, Me.ToolStripSeparator4, Me.tsbRSVP, Me.ToolStripSeparator3, Me.tsbCourse, Me.ToolStripSeparator2, Me.tsbSemester, Me.ToolStripSeparator11, Me.tsbLogout, Me.ToolStripSeparator10, Me.tsbHelp, Me.ToolStripSeparator1, Me.ToolStripSeparator9, Me.tsbTutor, Me.ToolStripSeparator12})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(848, 50)
+        Me.ToolStrip1.Size = New System.Drawing.Size(635, 50)
         Me.ToolStrip1.TabIndex = 2
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -264,7 +264,7 @@ Partial Class frmRole
         '
         Me.lblRoles.BackColor = System.Drawing.Color.White
         Me.lblRoles.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRoles.Location = New System.Drawing.Point(141, 109)
+        Me.lblRoles.Location = New System.Drawing.Point(55, 74)
         Me.lblRoles.Name = "lblRoles"
         Me.lblRoles.Size = New System.Drawing.Size(524, 67)
         Me.lblRoles.TabIndex = 3
@@ -274,7 +274,7 @@ Partial Class frmRole
         'grpRoles
         '
         Me.grpRoles.Controls.Add(Me.CheckBox1)
-        Me.grpRoles.Location = New System.Drawing.Point(48, 208)
+        Me.grpRoles.Location = New System.Drawing.Point(39, 177)
         Me.grpRoles.Name = "grpRoles"
         Me.grpRoles.Size = New System.Drawing.Size(200, 100)
         Me.grpRoles.TabIndex = 4
@@ -294,7 +294,7 @@ Partial Class frmRole
         'grpRoles2
         '
         Me.grpRoles2.Controls.Add(Me.lstRoles)
-        Me.grpRoles2.Location = New System.Drawing.Point(48, 333)
+        Me.grpRoles2.Location = New System.Drawing.Point(39, 302)
         Me.grpRoles2.Name = "grpRoles2"
         Me.grpRoles2.Size = New System.Drawing.Size(200, 134)
         Me.grpRoles2.TabIndex = 5
@@ -317,7 +317,7 @@ Partial Class frmRole
         Me.grpEdit.Controls.Add(Me.txtRole)
         Me.grpEdit.Controls.Add(Me.lblDesc)
         Me.grpEdit.Controls.Add(Me.lblRoleID)
-        Me.grpEdit.Location = New System.Drawing.Point(341, 208)
+        Me.grpEdit.Location = New System.Drawing.Point(304, 177)
         Me.grpEdit.Name = "grpEdit"
         Me.grpEdit.Size = New System.Drawing.Size(291, 259)
         Me.grpEdit.TabIndex = 6
@@ -326,16 +326,16 @@ Partial Class frmRole
         '
         'txtDesc
         '
-        Me.txtDesc.Location = New System.Drawing.Point(98, 64)
+        Me.txtDesc.Location = New System.Drawing.Point(98, 80)
         Me.txtDesc.MaxLength = 15
         Me.txtDesc.Multiline = True
         Me.txtDesc.Name = "txtDesc"
-        Me.txtDesc.Size = New System.Drawing.Size(165, 116)
+        Me.txtDesc.Size = New System.Drawing.Size(175, 116)
         Me.txtDesc.TabIndex = 5
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(188, 201)
+        Me.btnCancel.Location = New System.Drawing.Point(198, 220)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 4
@@ -344,7 +344,7 @@ Partial Class frmRole
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(98, 201)
+        Me.btnSave.Location = New System.Drawing.Point(98, 220)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 3
@@ -353,16 +353,16 @@ Partial Class frmRole
         '
         'txtRole
         '
-        Me.txtRole.Location = New System.Drawing.Point(98, 30)
+        Me.txtRole.Location = New System.Drawing.Point(98, 37)
         Me.txtRole.MaxLength = 15
         Me.txtRole.Name = "txtRole"
-        Me.txtRole.Size = New System.Drawing.Size(165, 20)
+        Me.txtRole.Size = New System.Drawing.Size(175, 20)
         Me.txtRole.TabIndex = 2
         '
         'lblDesc
         '
         Me.lblDesc.AutoSize = True
-        Me.lblDesc.Location = New System.Drawing.Point(29, 64)
+        Me.lblDesc.Location = New System.Drawing.Point(19, 83)
         Me.lblDesc.Name = "lblDesc"
         Me.lblDesc.Size = New System.Drawing.Size(63, 13)
         Me.lblDesc.TabIndex = 1
@@ -371,7 +371,7 @@ Partial Class frmRole
         'lblRoleID
         '
         Me.lblRoleID.AutoSize = True
-        Me.lblRoleID.Location = New System.Drawing.Point(29, 30)
+        Me.lblRoleID.Location = New System.Drawing.Point(19, 40)
         Me.lblRoleID.Name = "lblRoleID"
         Me.lblRoleID.Size = New System.Drawing.Size(46, 13)
         Me.lblRoleID.TabIndex = 0
@@ -382,7 +382,7 @@ Partial Class frmRole
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.ClientSize = New System.Drawing.Size(848, 555)
+        Me.ClientSize = New System.Drawing.Size(635, 473)
         Me.ControlBox = False
         Me.Controls.Add(Me.grpEdit)
         Me.Controls.Add(Me.grpRoles2)
@@ -390,6 +390,7 @@ Partial Class frmRole
         Me.Controls.Add(Me.lblRoles)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Name = "frmRole"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Roles"
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
