@@ -60,4 +60,6 @@ Public Class CRole
         'if not a new role, or it is new and has a unique ID, then do the save (update or insert)
         Return myDB.ExecSP("sp_saveRole", GetSaveParameters())
     End Function
+
+
 End Class
