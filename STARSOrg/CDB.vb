@@ -72,6 +72,7 @@ Public Class CDB
             Return -1
         End If
         objSQLCommand = New SqlCommand(strSP, objSQLConn)
+        objSQLCommand.CommandType = CommandType.StoredProcedure
         Try
             If Not params Is Nothing Then
                 For Each p As SqlParameter In params
@@ -79,11 +80,13 @@ Public Class CDB
                 Next
             End If
             Return objSQLCommand.ExecuteNonQuery()
+
         Catch ex As Exception
             MessageBox.Show("Error executing SP: " & ex.ToString, "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return -1
         End Try
     End Function
+
     Public Function GetSingleValueFromSP(ByVal strSP As String, ByRef params As ArrayList) As String
         Dim sqlDR As SqlDataReader = GetDataReaderBySP(strSP, params)
         Dim strResult As String

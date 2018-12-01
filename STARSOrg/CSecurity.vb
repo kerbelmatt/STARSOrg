@@ -86,5 +86,6 @@ Public Class CSecurity
         End If
         Return myDB.ExecSP("sp_SaveSecurity", GetSaveParameters())
     End Function
+
 End Class
 

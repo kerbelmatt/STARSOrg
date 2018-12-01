@@ -16,8 +16,10 @@
 
     Public intNextAction As Integer
     Public myDB As New CDB
-    Public user_PID As Integer
+    Public user_PID As String
     Public user_LName As String
     Public user_FName As String
+    Public user_Role As String
+
 
 End Module

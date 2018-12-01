@@ -29,28 +29,22 @@ Public Class CSecurities
         Return _Security.Save
     End Function
 
-    Public Function GetAllSecurities() As SqlDataReader
-        Return myDB.GetDataReaderBySP("dbo.sp_getAllSecurities", Nothing)
-    End Function
-
-    Public Function GetSecurityBySecurityID(strID As String) As CSecurity
-        Dim params As New ArrayList
-        params.Add(New SqlParameter("PID", strID))
-        FillObject(myDB.GetDataReaderBySP("dbo.sp_getSecurityBySecurityID", params))
-        Return _Security
-    End Function
-
-    Public Function CheckCredentials(strUserID As String, strPassword As String) As CSecurity
+    Public Function CheckCredentials(strUserID As String, strPassword As String) As Integer
         Dim params As New ArrayList
         params.Add(New SqlParameter("UserID", strUserID))
         params.Add(New SqlParameter("Password", strPassword))
-        FillObject(myDB.GetDataReaderBySP("dbo.sp_checkCredentials", params))
-        Return _Security
+        Dim strResult As String = myDB.GetSingleValueFromSP("sp_getPIDbyLogin", params)
+        If Not strResult = -1 Then
+            'Invalid login
+            Return -1
+        Else
+            Return strResult
+        End If
     End Function
 
     Public Function FillObject(sqlDR As SqlDataReader) As CSecurity
         Using sqlDR
-            If sqlDR.Read() Then ' Found the role record
+            If sqlDR.Read() Then
                 With _Security
                     .PID = sqlDR.Item("PID") & ""
                     .UserID = sqlDR.Item("UserID") & ""

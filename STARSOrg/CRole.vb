@@ -61,5 +61,8 @@ Public Class CRole
         Return myDB.ExecSP("sp_saveRole", GetSaveParameters())
     End Function
 
+    Public Function GetReportData() As SqlDataAdapter
+        Return myDB.GetDataAdapterBySP("dbo.sp_getAllRoles", Nothing)
+    End Function
 
 End Class

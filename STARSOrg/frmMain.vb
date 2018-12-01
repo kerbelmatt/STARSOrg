@@ -16,26 +16,67 @@
         tsbProxy.DisplayStyle = ToolStripItemDisplayStyle.Image
     End Sub
 
-    Private Sub PeformNextAction()
+    Private Sub SetToolbar()
+        If user_Role = "ADMIN" Then
+            'All toolstrip items are available
+        End If
+        'Officers can't access member management
+        If user_Role = "OFFICER" Then
+            tsbMember.Enabled = False
+            tsbMember.Visible = False
+            tss2.Visible = False
+        End If
+        'Members can't access course, role, member, or semester management
+        If user_Role = "MEMBER" Then
+            tsbCourse.Enabled = False
+            tsbCourse.Visible = False
+            tsbRole.Enabled = False
+            tsbRole.Visible = False
+            tsbMember.Enabled = False
+            tsbMember.Visible = False
+            tsbSemester.Enabled = False
+            tsbSemester.Visible = False
+            tss2.Visible = False : tss3.Visible = False : tss6.Visible = False : tss7.Visible = False
+        End If
+        'Guests can only access RSVP form
+        If user_Role = "GUEST" Then
+            tsbCourse.Enabled = False
+            tsbCourse.Visible = False
+            tsbRole.Enabled = False
+            tsbRole.Visible = False
+            tsbEvent.Enabled = False
+            tsbEvent.Visible = False
+            tsbMember.Enabled = False
+            tsbMember.Visible = False
+            tsbTutor.Enabled = False
+            tsbTutor.Visible = False
+            tsbSemester.Enabled = False
+            tsbSemester.Visible = False
+            tss2.Visible = False : tss3.Visible = False : tss4.Visible = False : tss5.Visible = False
+            tss7.Visible = False : tss8.Visible = False : tss9.Visible = False
+        End If
+    End Sub
+
+    Private Sub PerformNextAction()
         Select Case intNextAction
             Case ACTION_EVENT
                 tsbEvent.PerformClick()
             Case ACTION_HELP
-                tsbEvent.PerformClick()
+                tsbHelp.PerformClick()
             Case ACTION_HOME
-                tsbEvent.PerformClick()
+                tsbHome.PerformClick()
             Case ACTION_LOGOUT
-                tsbEvent.PerformClick()
+                tsbLogout.PerformClick()
             Case ACTION_MEMBER
-                tsbEvent.PerformClick()
+                tsbMember.PerformClick()
             Case ACTION_ROLE
-                tsbEvent.PerformClick()
+                tsbRole.PerformClick()
             Case ACTION_RSVP
-                tsbEvent.PerformClick()
+                tsbRSVP.PerformClick()
             Case ACTION_SEMESTER
-                tsbEvent.PerformClick()
+                tsbSemester.PerformClick()
             Case ACTION_TUTOR
-                tsbEvent.PerformClick()
+                tsbTutor.PerformClick()
             Case Else
                 'do nothing
         End Select
@@ -47,6 +88,7 @@
         RoleInfo = New frmRole
         SecurityInfo = New frmSecurity
         SecurityInfo.ShowDialog()
+        SetToolbar()
         Try
             myDB.OpenDB()
         Catch ex As Exception
@@ -77,9 +119,12 @@
     Private Sub tsbRole_Click(sender As Object, e As EventArgs) Handles tsbRole.Click
         Me.Hide()
         RoleInfo.ShowDialog()
+        Me.Show()
+        PerformNextAction()
     End Sub
 
     Private Sub tsbLogout_Click(sender As Object, e As EventArgs) Handles tsbLogout.Click
         EndProgram()
     End Sub
+
 End Class

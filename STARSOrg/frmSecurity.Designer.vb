@@ -22,76 +22,98 @@ Partial Class frmSecurity
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSecurity))
-        Me.txtUserName = New System.Windows.Forms.TextBox()
+        Me.txtUserID = New System.Windows.Forms.TextBox()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.lblUserName = New System.Windows.Forms.Label()
         Me.lblPassword = New System.Windows.Forms.Label()
         Me.btnLogin = New System.Windows.Forms.Button()
-        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.errP = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.btnGuest = New System.Windows.Forms.Button()
+        Me.lklChangePass = New System.Windows.Forms.LinkLabel()
+        CType(Me.errP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'txtUserName
+        'txtUserID
         '
-        Me.txtUserName.Location = New System.Drawing.Point(83, 20)
-        Me.txtUserName.Name = "txtUserName"
-        Me.txtUserName.Size = New System.Drawing.Size(163, 20)
-        Me.txtUserName.TabIndex = 5
+        Me.txtUserID.Location = New System.Drawing.Point(97, 23)
+        Me.txtUserID.Name = "txtUserID"
+        Me.txtUserID.Size = New System.Drawing.Size(189, 23)
+        Me.txtUserID.TabIndex = 0
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(83, 54)
+        Me.txtPassword.Location = New System.Drawing.Point(97, 65)
         Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(163, 20)
-        Me.txtPassword.TabIndex = 6
+        Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtPassword.Size = New System.Drawing.Size(189, 23)
+        Me.txtPassword.TabIndex = 1
         '
         'lblUserName
         '
         Me.lblUserName.AutoSize = True
-        Me.lblUserName.Location = New System.Drawing.Point(17, 23)
+        Me.lblUserName.Location = New System.Drawing.Point(20, 27)
         Me.lblUserName.Name = "lblUserName"
-        Me.lblUserName.Size = New System.Drawing.Size(58, 13)
+        Me.lblUserName.Size = New System.Drawing.Size(63, 15)
         Me.lblUserName.TabIndex = 7
         Me.lblUserName.Text = "Username:"
         '
         'lblPassword
         '
         Me.lblPassword.AutoSize = True
-        Me.lblPassword.Location = New System.Drawing.Point(19, 57)
+        Me.lblPassword.Location = New System.Drawing.Point(20, 68)
         Me.lblPassword.Name = "lblPassword"
-        Me.lblPassword.Size = New System.Drawing.Size(56, 13)
+        Me.lblPassword.Size = New System.Drawing.Size(60, 15)
         Me.lblPassword.TabIndex = 8
         Me.lblPassword.Text = "Password:"
         '
         'btnLogin
         '
-        Me.btnLogin.Location = New System.Drawing.Point(83, 92)
+        Me.btnLogin.Location = New System.Drawing.Point(97, 106)
         Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(75, 23)
-        Me.btnLogin.TabIndex = 9
+        Me.btnLogin.Size = New System.Drawing.Size(87, 27)
+        Me.btnLogin.TabIndex = 2
         Me.btnLogin.Text = "Login"
         Me.btnLogin.UseVisualStyleBackColor = True
         '
-        'btnCancel
+        'errP
         '
-        Me.btnCancel.Location = New System.Drawing.Point(171, 92)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnCancel.TabIndex = 10
-        Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = True
+        Me.errP.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
+        Me.errP.ContainerControl = Me
+        '
+        'btnGuest
+        '
+        Me.btnGuest.Location = New System.Drawing.Point(199, 106)
+        Me.btnGuest.Name = "btnGuest"
+        Me.btnGuest.Size = New System.Drawing.Size(87, 27)
+        Me.btnGuest.TabIndex = 9
+        Me.btnGuest.Text = "Guest"
+        Me.btnGuest.UseVisualStyleBackColor = True
+        '
+        'lklChangePass
+        '
+        Me.lklChangePass.AutoSize = True
+        Me.lklChangePass.Location = New System.Drawing.Point(140, 144)
+        Me.lklChangePass.Name = "lklChangePass"
+        Me.lklChangePass.Size = New System.Drawing.Size(101, 15)
+        Me.lklChangePass.TabIndex = 10
+        Me.lklChangePass.TabStop = True
+        Me.lklChangePass.Text = "Change Password"
         '
         'frmSecurity
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(270, 130)
-        Me.Controls.Add(Me.btnCancel)
+        Me.ClientSize = New System.Drawing.Size(310, 172)
+        Me.Controls.Add(Me.lklChangePass)
+        Me.Controls.Add(Me.btnGuest)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.lblPassword)
         Me.Controls.Add(Me.lblUserName)
         Me.Controls.Add(Me.txtPassword)
-        Me.Controls.Add(Me.txtUserName)
+        Me.Controls.Add(Me.txtUserID)
+        Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -99,15 +121,19 @@ Partial Class frmSecurity
         Me.Name = "frmSecurity"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Login"
+        Me.TopMost = True
+        CType(Me.errP, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents txtUserName As TextBox
+    Friend WithEvents txtUserID As TextBox
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents lblUserName As Label
     Friend WithEvents lblPassword As Label
     Friend WithEvents btnLogin As Button
-    Friend WithEvents btnCancel As Button
+    Friend WithEvents errP As ErrorProvider
+    Friend WithEvents lklChangePass As LinkLabel
+    Friend WithEvents btnGuest As Button
 End Class

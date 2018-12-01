@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 
 Public Class CRoles
+
     'Represents the ROLE table and its associated business rules
     Private _Role As CRole
 
@@ -33,7 +34,7 @@ Public Class CRoles
     Public Function GetRoleByRoleID(strID As String) As CRole
         Dim params As New ArrayList
         params.Add(New SqlParameter("roleID", strID))
-        FillObject(myDB.GetDataReaderBySP("dbo.sp_GetRoleByID", params))
+        FillObject(myDB.GetDataReaderBySP("dbo.sp_GetRoleByRoleID", params))
         Return _Role
     End Function
 
