@@ -56,7 +56,7 @@ Public Class frmSecurity
             If intResult = -1 Then 'error occurred in stored procedure
                 MessageBox.Show("Login unsuccessful, please check username and password", "Login error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Else
-                MessageBox.Show("Successful Login", "Login success", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show(intResult, "Login success", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
         Catch ex As Exception
 

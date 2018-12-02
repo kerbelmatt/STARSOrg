@@ -34,11 +34,11 @@ Public Class CSecurities
         params.Add(New SqlParameter("UserID", strUserID))
         params.Add(New SqlParameter("Password", strPassword))
         Dim strResult As String = myDB.GetSingleValueFromSP("sp_getPIDbyLogin", params)
-        If Not strResult = -1 Then
+        If strResult = -1 Then
             'Invalid login
             Return -1
         Else
-            Return strResult
+            Return CInt(strResult)
         End If
     End Function
 

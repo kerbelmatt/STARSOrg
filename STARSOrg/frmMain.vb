@@ -1,6 +1,8 @@
 ﻿Public Class frmMain
     Private RoleInfo As frmRole
     Private SecurityInfo As frmSecurity
+    Private TutorInfo As frmTutor
+    Private MemberInfo As frmMember
 
     Private Sub tsbProxy_MouseEnter(sender As Object, e As EventArgs) Handles tsbCourse.MouseEnter, tsbEvent.MouseEnter, tsbHelp.MouseEnter, tsbHome.MouseEnter, tsbLogout.MouseEnter, tsbMember.MouseEnter, tsbRole.MouseEnter, tsbRSVP.MouseEnter, tsbSemester.MouseEnter, tsbTutor.MouseEnter
         'we need to do this only because we put the graphic image in the BackgroundImage property instead of the Image property
@@ -87,7 +89,9 @@
         'instantiate a form object for each form in the application
         RoleInfo = New frmRole
         SecurityInfo = New frmSecurity
-        SecurityInfo.ShowDialog()
+        TutorInfo = New frmTutor
+        MemberInfo = New frmMember
+        'SecurityInfo.ShowDialog()
         SetToolbar()
         Try
             myDB.OpenDB()
@@ -127,4 +131,17 @@
         EndProgram()
     End Sub
 
+    Private Sub tsbTutor_Click(sender As Object, e As EventArgs) Handles tsbTutor.Click
+        Me.Hide()
+        TutorInfo.ShowDialog()
+        Me.Show()
+        PerformNextAction()
+    End Sub
+
+    Private Sub tsbMember_Click(sender As Object, e As EventArgs) Handles tsbMember.Click
+        Me.Hide()
+        MemberInfo.ShowDialog()
+        Me.Show()
+        PerformNextAction()
+    End Sub
 End Class
