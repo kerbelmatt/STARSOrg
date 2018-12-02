@@ -12,65 +12,65 @@ Public Class frmMember
     Private strPicturePath As String
 
 #Region "Toolbar Stuff"
-    Private Sub tsbProxy_MouseEnter(sender As Object, e As EventArgs)
+    Private Sub tsbProxy_MouseEnter(sender As Object, e As EventArgs) Handles tsbCourse.MouseEnter, tsbEvent.MouseEnter, tsbHelp.MouseEnter, tsbHome.MouseEnter, tsbLogout.MouseEnter, tsbMember.MouseEnter, tsbRole.MouseEnter, tsbRSVP.MouseEnter, tsbSemester.MouseEnter, tsbTutor.MouseEnter
         ' We need to do this because we're not putting image property of the toolbar buttons
         Dim tsbProxy As ToolStripButton
         tsbProxy = DirectCast(sender, ToolStripButton)
         tsbProxy.DisplayStyle = ToolStripItemDisplayStyle.Text
     End Sub
 
-    Private Sub tsbProxy_MouseLeave(sender As Object, e As EventArgs)
+    Private Sub tsbProxy_MouseLeave(sender As Object, e As EventArgs) Handles tsbCourse.MouseEnter, tsbEvent.MouseEnter, tsbHelp.MouseEnter, tsbHome.MouseEnter, tsbLogout.MouseEnter, tsbMember.MouseEnter, tsbRole.MouseEnter, tsbRSVP.MouseEnter, tsbSemester.MouseEnter, tsbTutor.MouseEnter
         ' We need to do this because we're not putting image property of the toolbar buttons
         Dim tsbProxy As ToolStripButton
         tsbProxy = DirectCast(sender, ToolStripButton)
         tsbProxy.DisplayStyle = ToolStripItemDisplayStyle.Image
     End Sub
 
-    Private Sub tsbCourse_Click(sender As Object, e As EventArgs)
+    Private Sub tsbCourse_Click(sender As Object, e As EventArgs) Handles tsbCourse.Click
         intNextAction = ACTION_COURSE
         Me.Hide()
     End Sub
 
-    Private Sub tsbEvents_Click(sender As Object, e As EventArgs)
+    Private Sub tsbEvents_Click(sender As Object, e As EventArgs) Handles tsbEvent.Click
         intNextAction = ACTION_EVENT
         Me.Hide()
     End Sub
 
-    Private Sub tsbHelp_Click(sender As Object, e As EventArgs)
+    Private Sub tsbHelp_Click(sender As Object, e As EventArgs) Handles tsbHelp.Click
         intNextAction = ACTION_HELP
         Me.Hide()
     End Sub
 
-    Private Sub tsbHome_Click(sender As Object, e As EventArgs)
+    Private Sub tsbHome_Click(sender As Object, e As EventArgs) Handles tsbHome.Click
         intNextAction = ACTION_HOME
         Me.Hide()
     End Sub
 
-    Private Sub tsbLogout_Click(sender As Object, e As EventArgs)
+    Private Sub tsbLogout_Click(sender As Object, e As EventArgs) Handles tsbLogout.Click
         intNextAction = ACTION_LOGOUT
         Me.Hide()
     End Sub
 
-    Private Sub tsbMember_Click(sender As Object, e As EventArgs)
-        intNextAction = ACTION_MEMBER
+    Private Sub tsbMember_Click(sender As Object, e As EventArgs) Handles tsbMember.Click
+        'No action required
+    End Sub
+
+    Private Sub tsbRole_Click(sender As Object, e As EventArgs) Handles tsbRole.Click
+        intNextAction = ACTION_ROLE
         Me.Hide()
     End Sub
 
-    Private Sub tsbRoles_Click(sender As Object, e As EventArgs)
-        'no action needed as we're already on the ROLE form!
-    End Sub
-
-    Private Sub tsbRSVP_Click(sender As Object, e As EventArgs)
+    Private Sub tsbRSVP_Click(sender As Object, e As EventArgs) Handles tsbRSVP.Click
         intNextAction = ACTION_RSVP
         Me.Hide()
     End Sub
 
-    Private Sub tsbSemesters_Click(sender As Object, e As EventArgs)
+    Private Sub tsbSemester_Click(sender As Object, e As EventArgs) Handles tsbSemester.Click
         intNextAction = ACTION_SEMESTER
         Me.Hide()
     End Sub
 
-    Private Sub tsbTutor_Click(sender As Object, e As EventArgs)
+    Private Sub tsbTutor_Click(sender As Object, e As EventArgs) Handles tsbTutor.Click
         intNextAction = ACTION_TUTOR
         Me.Hide()
     End Sub
@@ -278,30 +278,31 @@ Public Class frmMember
         If user_Role = "MEMBER" Then
             tsbCourse.Enabled = False
             tsbCourse.Visible = False
-            tsbRoles.Enabled = False
-            tsbRoles.Visible = False
+            tsbRole.Enabled = False
+            tsbRole.Visible = False
             tsbMember.Enabled = False
             tsbMember.Visible = False
-            tsbSemesters.Enabled = False
-            tsbSemesters.Visible = False
+            tsbSemester.Enabled = False
+            tsbSemester.Visible = False
             tss2.Visible = False : tss3.Visible = False : tss6.Visible = False : tss7.Visible = False
         End If
         'Guests can only access RSVP form
         If user_Role = "GUEST" Then
             tsbCourse.Enabled = False
             tsbCourse.Visible = False
-            tsbRoles.Enabled = False
-            tsbRoles.Visible = False
-            tsbEvents.Enabled = False
-            tsbEvents.Visible = False
+            tsbRole.Enabled = False
+            tsbRole.Visible = False
+            tsbEvent.Enabled = False
+            tsbEvent.Visible = False
             tsbMember.Enabled = False
             tsbMember.Visible = False
             tsbTutor.Enabled = False
             tsbTutor.Visible = False
-            tsbSemesters.Enabled = False
-            tsbSemesters.Visible = False
+            tsbSemester.Enabled = False
+            tsbSemester.Visible = False
             tss2.Visible = False : tss3.Visible = False : tss4.Visible = False : tss5.Visible = False
             tss7.Visible = False : tss8.Visible = False : tss9.Visible = False
         End If
     End Sub
+
 End Class

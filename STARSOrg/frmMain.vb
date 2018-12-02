@@ -91,7 +91,7 @@
         SecurityInfo = New frmSecurity
         TutorInfo = New frmTutor
         MemberInfo = New frmMember
-        'SecurityInfo.ShowDialog()
+        SecurityInfo.ShowDialog()
         SetToolbar()
         Try
             myDB.OpenDB()

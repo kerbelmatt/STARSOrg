@@ -87,4 +87,8 @@ Public Class CTutor
         ' If not a new tutor, or it is new and has a unique ID, then do the save (update or insert)
         Return myDB.ExecSP("sp_SaveTutor", GetSaveParameters())
     End Function
+
+    Public Function GetReportData() As SqlDataAdapter
+        Return myDB.GetDataAdapterBySP("dbo.sp_getAllTutors", Nothing)
+    End Function
 End Class

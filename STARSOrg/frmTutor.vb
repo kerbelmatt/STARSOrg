@@ -1,12 +1,5 @@
 ﻿Imports System.Data.SqlClient
 
-''' IDEAS
-''' Rather than using a boolean array to check which courses have already been selected by the user, 
-''' Can the COURSE table be crossed with the TUTOR_COURSE table with the user PID as a parameter? 
-''' This way you could check to see which CourseID's are already present and not bother loading them
-''' into the list
-''' IDEAS
-
 Public Class frmTutor
     Private sqlDA As SqlDataAdapter
     Private dt As DataTable
@@ -16,12 +9,22 @@ Public Class frmTutor
     Private objCourses As CCourses
     Private blnClearing As Boolean
     Private blnReloading As Boolean
+    Private intSelectedSemester As Integer
+    Private intCourses As Integer
+    Private frmTutorReport As frmTutorReport
+    Dim blnCourses() As Boolean
 
     Private Sub frmTutor_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        intCourses = myDB.GetSingleValueFromSP("sp_getNumCourses", Nothing)
+        ReDim blnCourses(intCourses)
+        SetTsbPermissions()
         objSemesters = New CSemesters
         objCourses = New CCourses
+        objTutors = New CTutors
         LoadSemesters()
         LoadAvailableCourses()
+        LoadMyCourses()
     End Sub
 
 #Region "Toolbar Stuff"
@@ -88,11 +91,48 @@ Public Class frmTutor
     Private Sub tsbTutor_Click(sender As Object, e As EventArgs) Handles tsbTutor.Click
         ' Nothing to do here, already on Tutor page
     End Sub
-#End Region
 
-    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-
+    Private Sub SetTsbPermissions()
+        If user_Role = "ADMIN" Then
+            'All toolstrip items are available
+        End If
+        'Officers can't access member management
+        If user_Role = "OFFICER" Then
+            tsbMember.Enabled = False
+            tsbMember.Visible = False
+            tss2.Visible = False
+        End If
+        'Members can't access course, role, member, or semester management
+        If user_Role = "MEMBER" Then
+            tsbCourse.Enabled = False
+            tsbCourse.Visible = False
+            tsbRole.Enabled = False
+            tsbRole.Visible = False
+            tsbMember.Enabled = False
+            tsbMember.Visible = False
+            tsbSemester.Enabled = False
+            tsbSemester.Visible = False
+            tss2.Visible = False : tss3.Visible = False : tss6.Visible = False : tss7.Visible = False
+        End If
+        'Guests can only access RSVP form
+        If user_Role = "GUEST" Then
+            tsbCourse.Enabled = False
+            tsbCourse.Visible = False
+            tsbRole.Enabled = False
+            tsbRole.Visible = False
+            tsbEvent.Enabled = False
+            tsbEvent.Visible = False
+            tsbMember.Enabled = False
+            tsbMember.Visible = False
+            tsbTutor.Enabled = False
+            tsbTutor.Visible = False
+            tsbSemester.Enabled = False
+            tsbSemester.Visible = False
+            tss2.Visible = False : tss3.Visible = False : tss4.Visible = False : tss5.Visible = False
+            tss7.Visible = False : t.Visible = False : tss9.Visible = False
+        End If
     End Sub
+#End Region
 
     Private Sub LoadSemesters()
         Dim objReader As SqlDataReader
@@ -100,7 +140,7 @@ Public Class frmTutor
         Try
             objReader = objSemesters.GetAllSemesters()
             Do While objReader.Read
-                lstSemester.Items.Add(objReader.Item("SemesterDescription"))
+                lstSemester.Items.Add(objReader.Item("SemesterID"))
             Loop
             objReader.Close()
         Catch ex As Exception
@@ -121,7 +161,7 @@ Public Class frmTutor
         Try
             objReader = objCourses.GetAllCourses()
             Do While objReader.Read
-                clbCourses.Items.Add(objReader.Item("CourseName"))
+                clbCourses.Items.Add(objReader.Item("CourseID"))
             Loop
             objReader.Close()
         Catch ex As Exception
@@ -131,41 +171,123 @@ Public Class frmTutor
 
     Private Sub LoadMyCourses()
         ' Use a stored procedure to get the courses that the user is tutoring for, call in form load event
-        'Dim objDR As SqlDataReader
-
+        Dim objReader As SqlDataReader
+        lstMember.Items.Clear()
+        Try
+            objReader = objTutors.GetAllTutors()
+            Do While objReader.Read
+                lstMember.Items.Add(objReader.Item("CourseID"))
+            Loop
+            objReader.Close()
+        Catch ex As Exception
+            MessageBox.Show("Error in frmTutor LoadMyCourses(): " & ex.ToString, "Program Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub frmTutor_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        ClearScreenControls(Me)
+        'ClearScreenControls(Me)
+
     End Sub
 
     Private Sub lstSemester_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstSemester.SelectedIndexChanged
         ' The user changed the selected semester, load appropriate (available) courses into clbCourses
-        Select Case lstSemester.SelectedItem.ToString
-            Case "Fall 2016"
+        ' Also clear 'My Courses' beforehand
+        Dim courseCheck As Integer
 
-            Case "Fall 2017"
+        For index As Integer = 0 To intCourses - 1 ' Clear all course selections
+            If clbCourses.GetItemChecked(index) Then
+                clbCourses.SetItemChecked(index, False)
+            End If
+        Next
 
-            Case "Spring 2017"
+        For index As Integer = 0 To intCourses - 1
+            If blnCourses(index) = 1 Then
+                clbCourses.SetItemChecked(index, True)
+            End If
+        Next
 
-            Case "Summer 2017"
+        For index As Integer = 1 To intCourses - 1
+            Dim params As New ArrayList
+            params.Add(New SqlParameter("SemesterID", lstSemester.SelectedIndex.ToString))
+            params.Add(New SqlParameter("PID", user_PID)) ' change this parameter value to the value given by security
+            params.Add(New SqlParameter("CourseName", clbCourses.Items(index).ToString))
 
-            Case Else
-                MessageBox.Show("Unexpected case in lstSemester_SelectedIndexChanged() Sub", "Program Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Select
+            courseCheck = myDB.GetSingleValueFromSP("sp_checkCourseExists", params)
+
+            If courseCheck = 1 Then ' Member is tutoring this course for the semester, Update 'My Courses'
+                blnCourses(index) = 1
+            End If
+            clbCourses.Items(index).ToString()
+        Next
+
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
         ' The user has (hopefully) made their course selections they want to tutor
         ' Check for errors and update database information accordingly.
         Dim blnErrors As Boolean
+        Dim intResult As Integer
+        tslStatus.Text = ""
+
         If clbCourses.SelectedIndex = -1 Then
             errP.SetError(clbCourses, "You must select a course to commit")
+            blnErrors = True
+        End If
+
+        If lstSemester.SelectedIndex = -1 Then
+            errP.SetError(lstSemester, "You must select a semester.")
             blnErrors = True
         End If
 
         If blnErrors Then ' If there were errors, do not proceed
             Exit Sub
         End If
+
+        ' Use multiple if statements with (and also)
+        For index As Integer = 1 To intCourses - 1
+            If Not clbCourses.GetItemChecked(index) AndAlso Not blnCourses(index) Then
+                ' No action, course never selected
+            End If
+            If clbCourses.GetItemChecked(index) AndAlso blnCourses(index) Then
+                ' No action, course was previously selected and there is no change
+            End If
+            If clbCourses.GetItemChecked(index) AndAlso Not blnCourses(index) Then
+                ' Add this course to this tutor's course list for the selected semester
+                lstMember.Items.Add(clbCourses.Items(index).ToString)
+                objTutors.CreateNewTutor()
+                With objTutors.CurrentObject
+                    .PID = "8192384" 'user_PID
+                    .CourseID = clbCourses.Items(index).ToString
+                    .SemesterID = lstSemester.SelectedItem.ToString
+                End With
+                Try
+                    Me.Cursor = Cursors.WaitCursor
+                    intResult = objTutors.Save
+                    If intResult = 1 Then
+                        tslStatus.Text = "Tutor record saved"
+                    End If
+                    If intResult = -1 Then
+                        MessageBox.Show("ukid must be unique. Unable to save tutor record.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+                    Me.Cursor = Cursors.Default
+                Catch ex As Exception
+
+                End Try
+            End If
+            If Not clbCourses.GetItemChecked(index) AndAlso blnCourses(index) Then
+                ' Delete this course from this tutor's course list for the selected semester
+                ' Pass in three parameters for PID CourseID and SemesterID to stored procedure
+                Dim params As ArrayList
+                params.Add(New SqlParameter("PID", user_PID))
+                params.Add(New SqlParameter("CourseID", clbCourses.Items(index).ToString))
+                params.Add(New SqlParameter("SemesterID", lstSemester.SelectedItem.ToString))
+                myDB.ExecSP("sp_deleteCourse", params)
+            End If
+        Next
+    End Sub
+
+    Private Sub btnReport_Click(sender As Object, e As EventArgs) Handles btnReport.Click
+        frmTutorReport = New frmTutorReport
+        frmTutorReport.Display()
     End Sub
 End Class

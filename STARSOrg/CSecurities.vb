@@ -29,17 +29,12 @@ Public Class CSecurities
         Return _Security.Save
     End Function
 
-    Public Function CheckCredentials(strUserID As String, strPassword As String) As Integer
+    Public Function CheckCredentials(strUserID As String, strPassword As String) As CSecurity
         Dim params As New ArrayList
         params.Add(New SqlParameter("UserID", strUserID))
         params.Add(New SqlParameter("Password", strPassword))
-        Dim strResult As String = myDB.GetSingleValueFromSP("sp_getPIDbyLogin", params)
-        If strResult = -1 Then
-            'Invalid login
-            Return -1
-        Else
-            Return CInt(strResult)
-        End If
+        FillObject(myDB.GetDataReaderBySP("dbo.sp_getPIDbyLogin", params))
+        Return _Security
     End Function
 
     Public Function FillObject(sqlDR As SqlDataReader) As CSecurity

@@ -37,7 +37,6 @@ Public Class frmSecurity
     End Sub
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-        Dim intResult As Integer
         Dim blnErrors As Boolean
 
         If Not ValidateTextBoxLength(txtPassword, errP) Then
@@ -47,20 +46,30 @@ Public Class frmSecurity
             blnErrors = True
         End If
 
-        Dim UserID = txtUserID.Text
-        Dim Password = txtPassword.Text
+        Dim mstrUserID = txtUserID.Text
+        Dim mstrPassword = txtPassword.Text
 
         Try
             Me.Cursor = Cursors.WaitCursor
-            intResult = objSecurities.CheckCredentials(UserID, Password)
-            If intResult = -1 Then 'error occurred in stored procedure
+            objSecurities.CheckCredentials(mstrUserID, mstrPassword)
+            If objSecurities.CurrentObject.PID = "" Then 'error occurred in stored procedure
                 MessageBox.Show("Login unsuccessful, please check username and password", "Login error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Me.Cursor = Cursors.Default
             Else
-                MessageBox.Show(intResult, "Login success", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                With objSecurities.CurrentObject
+                    user_PID = .PID
+                    user_Role = .SecRole
+                End With
+                MessageBox.Show("Successful Login. User PID: " & user_PID)
+                Me.Cursor = Cursors.Default
+                Me.Hide()
+                frmMain.Show()
             End If
         Catch ex As Exception
-
+            MessageBox.Show("Error in CheckCredentials()")
         End Try
+
+
 
 
 
